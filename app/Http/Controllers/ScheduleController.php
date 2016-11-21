@@ -52,12 +52,15 @@ class ScheduleController extends Controller
         return view('pages.AddCourse');
     }
 
-    public function dropCourse(){
+    public function dropCourse(Request $request, Schedule $schedule){
 
+        $CourseCode = $request->CourseCode;
+        Schedule::where('courseCode','=',$CourseCode)->delete();
         
-
-        return view('pages.DropCourse');
+        $display = Schedule::where('studentID', '=', Auth::user()->studentID)->get();
+        return view('pages.Schedule', compact('display'));
     }
+
     public function swapCourse(){
 
         

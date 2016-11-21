@@ -32,3 +32,4 @@ Route::post('/AddCourse', 'ScheduleController@addCourse');
 Route::post('/DropCourse', 'ScheduleController@dropCourse');
 Route::post('/SwapCourse', 'ScheduleController@swapCourse');
 Route::post('/Schedule', 'ScheduleController@addToSchedule');
+Route::post('/Schedule/update', 'ScheduleController@dropCourse');
