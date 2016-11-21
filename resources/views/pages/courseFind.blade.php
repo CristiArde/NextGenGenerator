@@ -11,6 +11,7 @@
       {{ csrf_field() }}
      <button type="submit"  class="btn btn-primary"> Search Course </button>
 	</form>
+    
 	<form method="POST" action="/courseRegistration">
      <button type="submit"  class="btn btn-primary"> Back To Menu </button>
      {{ csrf_field() }}

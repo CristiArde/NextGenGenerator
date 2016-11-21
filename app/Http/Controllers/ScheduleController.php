@@ -27,16 +27,20 @@ class ScheduleController extends Controller
         return view('pages.about');
     } */
 
-    public function searchCourse(){
+    public function searchCourse(Schedule $schedule){
+
+        
         return view('pages.courseFind');
     }
 
     public function courseDisplay(Request $request){
         $Semester = $request->Semester;
         $CourseCode = $request->CourseCode;
+
+        $display = Schedule::where('studentID', '=', Auth::user()->studentID)->where('semester', '=', $Semester)->get();
         
         $courses = Courses::where('Semester', '=', $Semester)->where('CourseCode','=',$CourseCode)->get();
-        return view('pages.courseDisplay', compact('courses'));
+        return view('pages.courseDisplay', compact('courses', 'display'));
     }
 
     public function myAccount(){
@@ -55,17 +59,32 @@ class ScheduleController extends Controller
     public function dropCourse(Request $request, Schedule $schedule){
 
         $CourseCode = $request->CourseCode;
-        Schedule::where('courseCode','=',$CourseCode)->delete();
+        Schedule::where('courseCode','=',$CourseCode)->where('studentID','=',Auth::user()->studentID)->delete();
         
         $display = Schedule::where('studentID', '=', Auth::user()->studentID)->get();
         return view('pages.Schedule', compact('display'));
     }
 
-    public function swapCourse(){
+    public function swapCourse(Request $request, Schedule $schedule){
+        //return $request->all();
 
-        
+        $CourseCode = $request->CourseCode;
+        $validate = Schedule::where('courseCode','=',$CourseCode)->where('studentID','=',Auth::user()->studentID)->get();
+        if(count($validate) == 0){
+            $CourseCodeOld = $request->oldCourse;
 
-        return view('pages.SwapCourse');
+            $course = new Course;
+            $course->studentID = Auth::user()->studentID;
+            $course->CourseCode = $request->CourseCode;
+            $course->CourseName = $request->CourseName;
+            $course->Semester = $request->Semester;
+            
+            Schedule::where('courseCode','=',$CourseCodeOld)->where('studentID','=',Auth::user()->studentID)->delete();
+            $schedule->semesterSchedule()->save($course);
+       }
+
+        $display = Schedule::where('studentID', '=', Auth::user()->studentID)->get();
+        return view('pages.Schedule', compact('display'));
     }
 
     public function addToSchedule(Request $request, Schedule $schedule){
