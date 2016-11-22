@@ -23,8 +23,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/courseRegistration', 'ScheduleController@registerSelect');
 //Route::get('/courseFind', 'PagesController@searchCourse');
+//Route::get('/Selection', 'LabTutorialController@Display')
 Route::get('/myAccount', 'ScheduleController@myAccount');
 
+
+//Route::post('/AddTutorial', 'LabTutorialController@Add');
+//Route::post('/swapTutorial', 'LabTutorialController@Swap');
 Route::post('/courseRegistration', 'ScheduleController@registerSelect');
 Route::post('/courseDisplay', 'ScheduleController@courseDisplay');
 Route::post('/courseFind', 'ScheduleController@searchCourse');

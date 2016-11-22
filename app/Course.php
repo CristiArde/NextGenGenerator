@@ -8,5 +8,6 @@ class Course extends Model
 {
     //
     protected $table = 'semester_schedule';
-    protected $fillable = ['studentID', 'CourseCode', 'CourseName','Semester'];
+    protected $fillable = ['StudentID', 'CourseID','CourseCode', 'CourseName','Semester', 'CourseType', 'DayofWeek', 'StartTime', 'EndTime', 'InstructorID', 'Classroom', 
+    'Credits'];
 }

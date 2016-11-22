@@ -15,14 +15,22 @@ class CreateStudentSchedules extends Migration
     {
         Schema::create('semester_schedule', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer("studentID");
-            $table->string('courseCode');
-            $table->string('courseName');
-            $table->string('semester');
-            $table->integer('credits')->default(0);
+            $table->integer('CourseID');
+            $table->integer("StudentID");
+            $table->string('CourseCode');
+            $table->string('CourseName');
+            $table->string('CourseType');
+            $table->string('DayOfWeek');
+            $table->time('StartTime');
+            $table->time('EndTime');
+            $table->string('Semester');
+            $table->integer('Credits');
+            //$table->string('PreReq');
+            $table->string('InstructorID');
+            $table->string('Classroom');
+            $table->string('Description')->nullable();
             $table->integer('schedule_id')->nullable();
-           /* $table->integer('lectureID');
-            $table->dateTimeTz('lectureStart');
+            /*$table->integer('lectureID');
             $table->dateTimeTz('lectureEnd');
             $table->string('lectureDaysOfWeek', 4);
             $table->string('lectureRoom', 15);
